@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", Arial, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: 1.1rem;
+}
+
+:root {
+  --background: #f4f0e7;
+  --foreground: #1f2b27;
+  --card: #fffdf8;
+  --card-foreground: #1f2b27;
+  --primary: #075f4e;
+  --primary-foreground: #ffffff;
+  --secondary: #e9e4d8;
+  --secondary-foreground: #264338;
+  --muted: #ebe8df;
+  --muted-foreground: #6c746d;
+  --accent: #efe0c5;
+  --accent-foreground: #5b3b20;
+  --destructive: #a83e31;
+  --destructive-foreground: #fffdf8;
+  --border: #d7d6cc;
+  --input: #c9cec6;
+  --ring: #075f4e;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground font-sans; }
+  button:not(:disabled), select:not(:disabled), input[type="checkbox"]:not(:disabled), input[type="radio"]:not(:disabled) { @apply cursor-pointer; }
+  ::selection { background: #c7ded0; color: #123b2f; }
+}
+
+@layer components {
+  .form-input {
+    width: 100%;
+    border: 1px solid #c9cec6;
+    background: #fffdf8;
+    color: #1f2b27;
+    border-radius: 0.8rem;
+    padding: 0.82rem 1rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: border-color 180ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .form-input:hover { border-color: #88a295; }
+  .form-input:focus { border-color: #075f4e; box-shadow: 0 0 0 4px rgba(7, 95, 78, 0.13); outline: none; }
+  .form-input:disabled { background: #f0eee7; color: #7e827d; cursor: not-allowed; }
+  .form-input.error { border-color: #a83e31; }
+  .choice-card {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    border: 1px solid #d7d6cc;
+    border-radius: 0.78rem;
+    background: #fffdf8;
+    padding: 0.8rem 0.9rem;
+    color: #33423b;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: border-color 180ms cubic-bezier(0.23, 1, 0.32, 1), background-color 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .choice-card:hover { border-color: #88a295; transform: translateY(-1px); }
+  .choice-card:has(input:checked) { border-color: #075f4e; background: #eaf3ed; color: #075f4e; }
+  .choice-card input { margin-top: 0.1rem; accent-color: #075f4e; width: 1rem; height: 1rem; flex: 0 0 auto; }
+  .section-enter { animation: section-enter 440ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+  .section-enter:nth-child(2) { animation-delay: 40ms; }
+  .section-enter:nth-child(3) { animation-delay: 80ms; }
+  .section-enter:nth-child(4) { animation-delay: 120ms; }
+  .section-enter:nth-child(5) { animation-delay: 160ms; }
+  .section-enter:nth-child(6) { animation-delay: 200ms; }
+  .section-enter:nth-child(7) { animation-delay: 240ms; }
+  @keyframes section-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .section-enter { animation: none; }
+    .choice-card, .form-input { transition: none; }
+  }
+}
